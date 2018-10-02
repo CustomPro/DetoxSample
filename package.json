@@ -1,0 +1,39 @@
+{
+  "name": "DetoxSample",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test-ios": "detox build --configuration ios.sim.debug && detox test --configuration ios.sim.debug"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.1.2",
+    "react": "16.5.0",
+    "react-native": "0.57.1"
+  },
+  "devDependencies": {
+    "babel-jest": "23.6.0",
+    "babel-preset-react-native": "^4.0.1",
+    "detox": "^9.0.4",
+    "jest": "23.6.0",
+    "react-test-renderer": "16.5.0"
+  },
+  "detox": {
+    "test-runner": "jest",
+    "specs": "e2e",
+    "configurations": {
+      "ios.sim.release": {
+        "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/DetoxSample.app",
+        "build": "export RCT_NO_LAUNCH_PACKAGER=true && xcodebuild -project ios/DetoxSample.xcodeproj -UseNewBuildSystem=NO -scheme DetoxSample -configuration Release -sdk iphonesimulator -derivedDataPath ios/build -quiet",
+        "type": "ios.simulator",
+        "name": "iPhone X"
+      },
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/DetoxSample.app",
+        "build": "xcodebuild -project ios/DetoxSample.xcodeproj -UseNewBuildSystem=NO -scheme DetoxSample -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone X"
+      }
+    }
+  }
+}
